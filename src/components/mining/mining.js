@@ -52,7 +52,7 @@ class Mining extends Component {
         { id: "SVM", name: "Support Vector Machine" },
         { id: "KNN", name: "K-Nearest Neighbor" },
         { id: "MP", name: "Multilayer Perceptron" },
-        { id: "HC", name: "Hierarchical Clustring" }
+        { id: "HC", name: "Hierarchical Clustering" }
       ]
     });
     var checker = [];
