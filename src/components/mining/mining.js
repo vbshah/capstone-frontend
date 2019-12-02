@@ -29,7 +29,8 @@ class Mining extends Component {
       max_depth: 2,
       modalShow: false,
       modalTopic: "RF",
-      modalContent: "Explanation of Random Forest"
+      modalContent: "Explanation of Random Forest",
+      n_clusters: 2
     };
 
     this.selectEvalutionModel = this.selectEvalutionModel.bind(this);
@@ -62,18 +63,14 @@ class Mining extends Component {
       this.setState({ checker: checker });
       this.setState({
         column_dropdown: (
-          <Row>
-            <Col>Select target Variable</Col>
-            <Col>
-              <select onChange={e => this.setTargetValue(e)}>
-                <option>--Select--</option>
-                {this.state.columns.map((item, key) => (
-                  <option key={key}>{item}</option>
-                ))}
-              </select>
-            </Col>
-            <Col></Col>
-          </Row>
+          <Col>
+            <select onChange={e => this.setTargetValue(e)}>
+              <option>--Select--</option>
+              {this.state.columns.map((item, key) => (
+                <option key={key}>{item}</option>
+              ))}
+            </select>
+          </Col>
         )
       });
     });
@@ -192,6 +189,26 @@ class Mining extends Component {
         })
 
         .catch(err => console.log(err));
+    } else if (this.state.selectedModel == "HC") {
+      const data = new FormData();
+      data.append("fileKey", fileKey);
+      data.append("columns", required_columns);
+      data.append("n_clusters", this.state.n_clusters);
+      const url = `${baseUrl}/hierarchical`;
+      fetch(url, {
+        method: "POST",
+        body: data
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log("getting data", data);
+          if (data.cluster) images.push(data.cluster);
+          if (data.dendrogram) images.push(data.dendrogram);
+        })
+        .then(() => {
+          this.setState({ images });
+        })
+        .catch(err => console.log(err));
     }
     // console.log("images we have", images);
     this.setState({ images });
@@ -226,7 +243,16 @@ class Mining extends Component {
     console.log("vadfsdf", this.state.selectedModel);
 
     if (this.state.selectedModel === "LR") {
-      return <div>{this.state.column_dropdown}</div>;
+      return (
+        <div>
+          <Container>
+            <Row>
+              <Col>Select target variable:</Col>
+            </Row>
+            {this.state.column_dropdown}
+          </Container>
+        </div>
+      );
     }
 
     if (this.state.selectedModel === "RF") {
@@ -251,19 +277,10 @@ class Mining extends Component {
             </Col>
             <Col></Col>
           </Row>
+          <Row>
+            <Col>Select target variable:</Col>
+          </Row>
           {this.state.column_dropdown}
-          {/* <Row>
-            <Col>Select target Variable</Col>
-            <Col>
-              <select onChange={e => this.setTargetValue(e)}>
-                <option>--Select--</option>
-                {this.state.columns.map((item, key) => (
-                  <option key={key}>{item}</option>
-                ))}
-              </select>
-            </Col>
-            <Col></Col>
-          </Row> */}
         </Container>
       );
     }
@@ -281,7 +298,41 @@ class Mining extends Component {
     }
 
     if (this.state.selectedModel === "HC") {
-      return <div></div>;
+      console.log("inside HC");
+      return (
+        <Container style={{ marginTop: "15px" }}>
+          <Row>
+            <Col>Enter the number of clusters you want</Col>
+            <Col>
+              <input
+                type="text"
+                onChange={e => this.setState({ n_clusters: e.target.value })}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col>Select column 1:</Col>
+          </Row>
+          <Row>{this.state.column_dropdown}</Row>
+          <Row>
+            <Col>Select column 2:</Col>
+          </Row>
+          <Row>{this.state.column_dropdown}</Row>
+
+          {/* <Row>
+            <Col>Select target Variable</Col>
+            <Col>
+              <select onChange={e => this.setTargetValue(e)}>
+                <option>--Select--</option>
+                {this.state.columns.map((item, key) => (
+                  <option key={key}>{item}</option>
+                ))}
+              </select>
+            </Col>
+            <Col></Col>
+          </Row> */}
+        </Container>
+      );
     }
   }
 
