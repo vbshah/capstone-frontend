@@ -5,8 +5,10 @@ import "react-table/react-table.css";
 import renderIf from "render-if";
 import { JsonToTable } from "react-json-to-table";
 import { baseUrl } from "../../shared/baseUrl";
-
+import Modal from "react-bootstrap/Modal";
 import { Container, Row, Col, Button } from "react-bootstrap";
+import CKEditor from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 class InputForm extends Component {
   state = {
@@ -16,7 +18,8 @@ class InputForm extends Component {
     images: [],
     displayCorrelation: false,
     correlationRows: [],
-    correlationCols: []
+    correlationCols: [],
+    modalShow: false
   };
 
   componentDidMount() {
@@ -99,6 +102,33 @@ class InputForm extends Component {
     }
   };
 
+  getHelp = () => {
+    console.log("button clicked");
+    const topic = this.state.chartType;
+    console.log("selected topic", topic);
+    const url = `${baseUrl}/get-help`;
+    const statics_url = `${baseUrl}/static/`;
+    const data = new FormData();
+    data.append("topic", topic);
+    fetch(url, {
+      method: "POST",
+      body: data
+    })
+      .then(response => response.json())
+      .then(data => {
+        fetch(statics_url + data["description"])
+          .then(res => {
+            return res.text();
+          })
+          .then(html_data => {
+            console.log("html data", html_data);
+            this.setState({ modalContent: html_data });
+          });
+        this.setState({ modalTopic: this.state.chartType });
+        this.setState({ modalShow: true });
+      });
+  };
+
   render() {
     const { columns: cols } = this.state;
     return (
@@ -131,12 +161,14 @@ class InputForm extends Component {
               <option>Histogram</option>
               <option>Correlation</option>
               <option>Box Plot</option>
+              <option>Apply PCA</option>
             </select>
           </Col>
           <Col>
-            <Button
-              onClick={() => this.getCharts()}
-            >Generate</Button>
+            <Button onClick={() => this.getCharts()}>Generate</Button>
+          </Col>
+          <Col>
+            <Button onClick={() => this.getHelp()}>Help!</Button>
           </Col>
         </Row>
         <br />
@@ -174,6 +206,32 @@ class InputForm extends Component {
         <br />
         <br />
         <br />
+        <Modal
+          show={this.state.modalShow}
+          onHide={e => this.setState({ modalShow: false })}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>{this.state.chartType}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <CKEditor
+              editor={ClassicEditor}
+              data={this.state.modalContent}
+              disabled={true}
+              config={{ toolbar: [] }}
+            />
+            {/* {renderHTML(this.state.modalContent)} */}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="secondary"
+              onClick={e => this.setState({ modalShow: false })}
+            >
+              Close
+            </Button>
+            <Button variant="primary">Save Changes</Button>
+          </Modal.Footer>
+        </Modal>
       </React.Fragment>
     );
   }
