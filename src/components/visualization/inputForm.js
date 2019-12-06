@@ -168,7 +168,9 @@ class InputForm extends Component {
             <Button onClick={() => this.getCharts()}>Generate</Button>
           </Col>
           <Col>
-            <Button onClick={() => this.getHelp()}>Help!</Button>
+            <Button 
+            style={{backgroundColor: `#17a2b8`, borderColor: '#17a2b8'}}
+            onClick={() => this.getHelp()}>Help!</Button>
           </Col>
         </Row>
         <br />
@@ -187,7 +189,7 @@ class InputForm extends Component {
             </Col>
           ))}
         </Row>
-        <Row>
+        <Row style={{ marginLeft: 10}}>
           {this.state.chartType == "Correlation" ? (
             <h4 style={{ textAlign: "center", padding: "-5px" }}>
               Correlation

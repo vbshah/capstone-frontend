@@ -1,6 +1,21 @@
 import React, { Component } from "react";
 
 class Items extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentState :'csvUpload'
+    }
+
+    this.selectState = this.selectState.bind(this);
+
+  }
+
+  selectState(currentState) {
+    this.setState({currentState})
+  }
+
   render() {
     return (
       <div
@@ -16,7 +31,7 @@ class Items extends Component {
       >
         <div
           style={{
-            backgroundColor: "#3b5998",
+            backgroundColor: this.state.currentState === 'csvUpload' ? "#17a2b8" : "#3b5998",
             width: "100%",
             marginBottom: "20px",
             cursor: "pointer",
@@ -25,13 +40,16 @@ class Items extends Component {
             paddingTop: "5px",
             paddingBottom: "5px"
           }}
-          onClick={e => this.props.changeDisplay("csvUpload")}
+          onClick={e => {
+            this.props.changeDisplay("csvUpload");
+            this.selectState("csvUpload");
+          }}
         >
           Upload CSV File
         </div>
         <div
           style={{
-            backgroundColor: "#3b5998",
+            backgroundColor: this.state.currentState === 'displayContent' ? "#17a2b8" : "#3b5998",
             width: "100%",
             marginBottom: "20px",
             cursor: "pointer",
@@ -40,13 +58,16 @@ class Items extends Component {
             paddingTop: "5px",
             paddingBottom: "5px"
           }}
-          onClick={e => this.props.changeDisplay("displayContent")}
+          onClick={e => {
+            this.props.changeDisplay("displayContent");
+            this.selectState("displayContent");
+          }}
         >
           Display Data
         </div>
         <div
           style={{
-            backgroundColor: "#3b5998",
+            backgroundColor: this.state.currentState === 'preProcessing' ? "#17a2b8" : "#3b5998",
             width: "100%",
             marginBottom: "20px",
             cursor: "pointer",
@@ -55,13 +76,17 @@ class Items extends Component {
             paddingTop: "5px",
             paddingBottom: "5px"
           }}
-          onClick={e => this.props.changeDisplay("preProcessing")}
+          onClick={e => {
+            this.props.changeDisplay("preProcessing");
+            this.selectState("preProcessing");
+
+          }}
         >
           Preprocessing Data
         </div>
         <div
           style={{
-            backgroundColor: "#3b5998",
+            backgroundColor: this.state.currentState === 'visualization' ? "#17a2b8" : "#3b5998",
             width: "100%",
             marginBottom: "20px",
             cursor: "pointer",
@@ -70,13 +95,17 @@ class Items extends Component {
             paddingTop: "5px",
             paddingBottom: "5px"
           }}
-          onClick={e => this.props.changeDisplay("visualization")}
+          onClick={e => {
+            this.props.changeDisplay("visualization");
+            this.selectState("visualization");
+
+        }}
         >
           Data Visualization
         </div>
         <div
           style={{
-            backgroundColor: "#3b5998",
+            backgroundColor: this.state.currentState === 'transformation' ? "#17a2b8" : "#3b5998",
             width: "100%",
             marginBottom: "20px",
             cursor: "pointer",
@@ -85,13 +114,17 @@ class Items extends Component {
             paddingTop: "5px",
             paddingBottom: "5px"
           }}
-          onClick={e => this.props.changeDisplay("transformation")}
+          onClick={e => {
+            this.props.changeDisplay("transformation");
+            this.selectState("transformation");
+
+          }}
         >
           Data Tranformation
         </div>
         <div
           style={{
-            backgroundColor: "#3b5998",
+            backgroundColor: this.state.currentState === 'mining' ? "#17a2b8" : "#3b5998",
             width: "100%",
             marginBottom: "20px",
             cursor: "pointer",
@@ -100,13 +133,17 @@ class Items extends Component {
             paddingTop: "5px",
             paddingBottom: "5px"
           }}
-          onClick={e => this.props.changeDisplay("mining")}
+          onClick={e => {
+            this.props.changeDisplay("mining");
+            this.selectState("mining");
+
+        }}
         >
           Data Mining
         </div>
         <div
           style={{
-            backgroundColor: "#3b5998",
+            backgroundColor: this.state.currentState === 'codebox' ? "#17a2b8" : "#3b5998",
             width: "100%",
             marginBottom: "20px",
             cursor: "pointer",
@@ -115,7 +152,10 @@ class Items extends Component {
             paddingTop: "5px",
             paddingBottom: "5px"
           }}
-          onClick={e => this.props.changeDisplay("codebox")}
+          onClick={e => {
+            this.props.changeDisplay("codebox");
+            this.selectState("codebox");
+        }}
         >
           Your Code Box
         </div>

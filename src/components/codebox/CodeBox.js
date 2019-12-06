@@ -81,6 +81,7 @@ class CodeBox extends Component {
                 name="capstone"
                 value={this.state.user_code}
                 editorProps={{ $blockScrolling: true }}
+                width={'auto'}
               />
             </Col>
             <Col xs="6" sm="6">
@@ -93,17 +94,16 @@ class CodeBox extends Component {
                 name="capstone"
                 value={this.state.file_code}
                 editorProps={{ $blockScrolling: true }}
+                width={'auto'}
               />
             </Col>
           </Row>
           <br />
           <Row>
             <Col style={{ marginLeft: 100 }}>
-              <input
-                type="button"
+              <Button
                 onClick={this.submitCode}
-                value="submit"
-              ></input>
+              >Submit</Button>
             </Col>
           </Row>
         </Container>

@@ -383,14 +383,12 @@ class Mining extends Component {
               />
             </Col>
             <Col>
-              <button
-                class="btn btn-info"
-                type="button"
-                value="Help!"
-                onClick={() => this.getModelInfo()}
+              <Button
+              style={{backgroundColor: `#17a2b8`, borderColor: '#17a2b8'}}
+              onClick={() => this.getModelInfo()}
               >
                 Help!
-              </button>
+              </Button>
             </Col>
             <Col>
               <select onChange={this.selectModel}>{modelList}</select>
@@ -417,11 +415,9 @@ class Mining extends Component {
           </Row>
           <Row>
             <Col style={{ marginLeft: 90 }}>
-              <input
-                type="button"
-                value="submit"
+              <Button
                 onClick={() => this.submitData()}
-              />
+              >Submit</Button>
             </Col>
           </Row>
         </Container>

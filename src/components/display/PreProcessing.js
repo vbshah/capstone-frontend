@@ -232,11 +232,10 @@ class PreProcessing extends Component {
                     Submit
                   </Button>
                 </td>
-                <input
-                  type="button"
-                  value="Help!"
+                <Button
                   onClick={() => this.getData("remove-missing")}
-                />
+                  style={{backgroundColor: `#17a2b8`, borderColor: '#17a2b8'}}
+                >Help!</Button>
               </tr>
               <tr>
                 <td>Remove Outside of Range</td>
@@ -262,11 +261,10 @@ class PreProcessing extends Component {
                 <td>
                   <Button onClick={() => this.sendRemoveRange()}>Submit</Button>
                 </td>
-                <input
-                  type="button"
-                  value="Help!"
+                <Button
                   onClick={() => this.getData("remove-range")}
-                />
+                  style={{backgroundColor: `#17a2b8`, borderColor: '#17a2b8'}}
+                  >Help!</Button>
               </tr>
               <tr>
                 <td>Replace NAN By Specific Value</td>
@@ -285,11 +283,10 @@ class PreProcessing extends Component {
                     Submit
                   </Button>
                 </td>
-                <input
-                  type="button"
-                  value="Help!"
+                <Button
                   onClick={() => this.getData("replace-nan")}
-                />
+                  style={{backgroundColor: `#17a2b8`, borderColor: '#17a2b8'}}
+                  >Help!</Button>
               </tr>
               <tr>
                 <td>Replace Specific Value</td>
@@ -317,7 +314,10 @@ class PreProcessing extends Component {
                     Submit
                   </Button>
                 </td>
-                <Button onClick={() => this.getData("remove-range")}>
+                <Button 
+                onClick={() => this.getData("remove-range")}
+                style={{backgroundColor: `#17a2b8`, borderColor: '#17a2b8'}}
+                >
                   Help!
                 </Button>
               </tr>
@@ -333,7 +333,10 @@ class PreProcessing extends Component {
                     Submit
                   </Button>
                 </td>
-                <Button onClick={() => this.getData("remove-range")}>
+                <Button 
+                onClick={() => this.getData("remove-range")}
+                style={{backgroundColor: `#17a2b8`, borderColor: '#17a2b8'}}
+                >
                   Help!
                 </Button>
               </tr>
@@ -349,7 +352,10 @@ class PreProcessing extends Component {
                     Submit
                   </Button>
                 </td>
-                <Button onClick={() => this.getData("remove-range")}>
+                <Button 
+                onClick={() => this.getData("remove-range")}
+                style={{backgroundColor: `#17a2b8`, borderColor: '#17a2b8'}}
+                >
                   Help!
                 </Button>
               </tr>

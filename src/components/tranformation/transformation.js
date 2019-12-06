@@ -144,14 +144,12 @@ class Tranformation extends Component {
                     {` `}
                     {` `}
                     {` `}
-                    <button
-                      class="btn btn-info"
-                      type="button"
-                      value="Help!"
+                    <Button
+                      style={{backgroundColor: `#17a2b8`, borderColor: '#17a2b8', marginLeft:10}}
                       onClick={() => this.getData("standard-scaling")}
                     >
                       Help!
-                    </button>
+                    </Button>
                   </div>
                 </div>
                 <br />
@@ -169,14 +167,12 @@ class Tranformation extends Component {
                     {` `}
                     {` `}
                     {` `}
-                    <button
-                      class="btn btn-info"
-                      type="button"
-                      value="Help!"
+                    <Button
+                      style={{backgroundColor: `#17a2b8`, borderColor: '#17a2b8', marginLeft:10}}
                       onClick={() => this.getData("standard-scaling")}
                     >
                       Help!
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>
